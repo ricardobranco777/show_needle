@@ -40,7 +40,6 @@ def main():
         rect = patches.Rectangle(
             (item['xpos'], item['ypos']), item['width'], item['height'],
             linewidth=1, edgecolor=COLORS[item['type']], facecolor='none')
-        axes.add_patch(rect)
         # Add the patch to the Axes
         axes.add_patch(rect)
 
