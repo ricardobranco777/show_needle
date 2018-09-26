@@ -43,6 +43,7 @@ def main():
         # Add the patch to the Axes
         axes.add_patch(rect)
 
+    plt.axis('off')
     plt.show()
 
 
