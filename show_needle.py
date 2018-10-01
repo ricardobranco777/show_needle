@@ -18,7 +18,7 @@ COLORS = {'match': 'green', 'exclude': 'red', 'ocr': 'orange'}
 def main():
     "Main function"
     if len(sys.argv) != 2:
-        print("Usage: %s NEEDLE[.json|png]", file=sys.stderr)
+        print("Usage: %s NEEDLE[.json|png]" % sys.argv[0], file=sys.stderr)
         sys.exit(1)
 
     needle = re.sub(r"\.(png|json)$", "", sys.argv[1])
