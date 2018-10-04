@@ -5,12 +5,7 @@ import re
 import json
 import sys
 
-import matplotlib.pyplot as plt
-from matplotlib import patches
-
-from PIL import Image
-
-import numpy as np
+from PIL import Image, ImageDraw
 
 COLORS = {'match': 'green', 'exclude': 'red', 'ocr': 'orange'}
 
@@ -23,28 +18,21 @@ def main():
 
     needle = re.sub(r"\.(png|json)$", "", sys.argv[1])
 
-    image = np.array(Image.open(needle + ".png"), dtype=np.uint8)
-
-    # Create figure and axes
-    _, axes = plt.subplots(1)
-
-    # Display the image
-    axes.imshow(image)
+    image = Image.open(needle + ".png").convert('RGBA')
+    draw = ImageDraw.Draw(image)
 
     with open(needle + ".json") as file:
         data = json.load(file)
 
     # Draw rectangles
     for item in (_ for _ in data['area']):
-        # Create a Rectangle patch
-        rect = patches.Rectangle(
-            (item['xpos'], item['ypos']), item['width'], item['height'],
-            linewidth=1, edgecolor=COLORS[item['type']], facecolor='none')
-        # Add the patch to the Axes
-        axes.add_patch(rect)
+        draw.rectangle(
+            ((item['xpos'], item['ypos']),
+             (item['xpos'] + item['width'], item['ypos'] + item['height'])),
+            outline=COLORS[item['type']])
 
-    plt.axis('off')
-    plt.show()
+    del draw
+    image.show()
 
 
 if __name__ == "__main__":
