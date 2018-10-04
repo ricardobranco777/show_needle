@@ -17,7 +17,7 @@ def main():
         print("Usage: %s NEEDLE[.json|png]" % sys.argv[0], file=sys.stderr)
         sys.exit(1)
 
-    needle = re.sub(r"\.(png|json)$", "", sys.argv[1])
+    needle = re.sub(r"\.?(png|json)?$", "", sys.argv[1])
 
     image = Image.open(needle + ".png").convert('RGBA')
     draw = ImageDraw.Draw(image)
