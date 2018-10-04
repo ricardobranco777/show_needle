@@ -8,6 +8,7 @@ import sys
 from PIL import Image, ImageDraw
 
 COLORS = {'match': 'green', 'exclude': 'red', 'ocr': 'orange'}
+THICKNESS = 2
 
 
 def main():
@@ -26,10 +27,15 @@ def main():
 
     # Draw rectangles
     for item in (_ for _ in data['area']):
-        draw.rectangle(
-            ((item['xpos'], item['ypos']),
-             (item['xpos'] + item['width'], item['ypos'] + item['height'])),
-            outline=COLORS[item['type']])
+        for i in range(THICKNESS):
+            draw.rectangle(
+                [
+                    item['xpos'] + i,
+                    item['ypos'] + i,
+                    item['xpos'] - i + item['width'],
+                    item['ypos'] - i + item['height']
+                ],
+                outline=COLORS[item['type']])
 
     del draw
     image.show()
