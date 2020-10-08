@@ -31,7 +31,7 @@ def show_needle(pathname):
         sys.exit(1)
 
     # Draw rectangles
-    for item in (_ for _ in data['area']):
+    for item in data['area']:
         for i in range(THICKNESS):
             draw.rectangle(
                 [
@@ -42,7 +42,6 @@ def show_needle(pathname):
                 ],
                 outline=COLORS[item['type']])
 
-    del draw
     image.show()
 
 
