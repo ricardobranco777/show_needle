@@ -19,11 +19,20 @@ def main():
 
     needle = re.sub(r"\.?(png|json)?$", "", sys.argv[1])
 
-    image = Image.open(needle + ".png").convert('RGBA')
+    try:
+        image = Image.open(needle + ".png").convert('RGBA')
+    except OSError as err:
+        print("ERROR: %s" % err, file=sys.stderr)
+        sys.exit(1)
+
     draw = ImageDraw.Draw(image)
 
-    with open(needle + ".json") as file:
-        data = json.load(file)
+    try:
+        with open(needle + ".json") as file:
+            data = json.load(file)
+    except OSError as err:
+        print("ERROR: %s" % err, file=sys.stderr)
+        sys.exit(1)
 
     # Draw rectangles
     for item in (_ for _ in data['area']):
