@@ -11,13 +11,9 @@ COLORS = {'match': 'green', 'exclude': 'red', 'ocr': 'orange'}
 THICKNESS = 2
 
 
-def main():
+def show_needle(pathname):
     "Main function"
-    if len(sys.argv) != 2:
-        print("Usage: %s NEEDLE[.json|png]" % sys.argv[0], file=sys.stderr)
-        sys.exit(1)
-
-    needle = re.sub(r"\.?(png|json)?$", "", sys.argv[1])
+    needle = re.sub(r"\.?(png|json)?$", "", pathname)
 
     try:
         image = Image.open(needle + ".png").convert('RGBA')
@@ -51,7 +47,11 @@ def main():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: %s NEEDLE[.json|png]" % sys.argv[0], file=sys.stderr)
+        sys.exit(1)
+
     try:
-        main()
+        show_needle(sys.argv[1])
     except KeyboardInterrupt:
         sys.exit(1)
