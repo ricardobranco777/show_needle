@@ -24,7 +24,7 @@ def show_needle(pathname):
     draw = ImageDraw.Draw(image)
 
     try:
-        with open(needle + ".json") as file:
+        with open(needle + ".json", encoding="utf-8") as file:
             data = json.load(file)
     except OSError as err:
         print("ERROR: %s" % err, file=sys.stderr)
