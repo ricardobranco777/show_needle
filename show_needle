@@ -16,18 +16,18 @@ def show_needle(pathname):
     needle = re.sub(r"\.?(png|json)?$", "", pathname)
 
     try:
-        image = Image.open(needle + ".png").convert('RGBA')
+        image = Image.open(f"{needle}.png").convert('RGBA')
     except OSError as err:
-        print("ERROR: %s" % err, file=sys.stderr)
+        print(f"ERROR: {err}", file=sys.stderr)
         sys.exit(1)
 
     draw = ImageDraw.Draw(image)
 
     try:
-        with open(needle + ".json", encoding="utf-8") as file:
+        with open(f"{needle}.json", encoding="utf-8") as file:
             data = json.load(file)
     except OSError as err:
-        print("ERROR: %s" % err, file=sys.stderr)
+        print(f"ERROR: {err}", file=sys.stderr)
         sys.exit(1)
 
     # Draw rectangles
@@ -47,7 +47,7 @@ def show_needle(pathname):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: %s NEEDLE[.json|png]" % sys.argv[0], file=sys.stderr)
+        print(f"Usage: {sys.argv[0]} NEEDLE[.json|png]", file=sys.stderr)
         sys.exit(1)
 
     try:
