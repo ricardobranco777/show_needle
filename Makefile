@@ -1,3 +1,13 @@
-test:
-	@pylint show_needle
-	@flake8 show_needle
+BIN=show_needle
+FILES=$(BIN)
+
+.PHONY: all
+all: flake8 pylint
+
+.PHONY: flake8
+flake8:
+	@flake8 --ignore=E501 $(FILES)
+
+.PHONY: pylint
+pylint:
+	@pylint --disable=line-too-long $(FILES)

@@ -11,7 +11,7 @@ COLORS = {'match': 'green', 'exclude': 'red', 'ocr': 'orange'}
 THICKNESS = 2
 
 
-def show_needle(pathname):
+def show_needle(pathname: str):
     "Main function"
     needle = re.sub(r"\.?(png|json)?$", "", pathname)
 
